@@ -1,0 +1,15 @@
+create schema firstweek;
+
+use firstweek;
+
+-- 创建一个用户表
+create table tb_user
+(
+    id       int unsigned auto_increment comment '主键ID'
+        primary key,
+    username varchar(20) not null comment '用户名',
+    password varchar(20) not null comment '密码',
+    gender   char        not null comment '性别',
+    addr     varchar(30) not null comment '地址'
+)
+    comment '用户表';
