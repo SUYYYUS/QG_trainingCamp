@@ -16,7 +16,7 @@ public class druid {
         //获取配置文件
         Properties properties = new Properties();
         //加载配置文件
-        properties.load(new FileInputStream("E:\\development02\\firstweek\\src\\main\\java\\druid.properties"));
+        properties.load(new FileInputStream("C:\\Users\\28937\\Desktop\\qg_\\QG_trainingCamp\\smallGroup\\week_1\\firstweek\\src\\main\\java\\druid.properties"));
         //获取数据池
         DataSource dataSource = DruidDataSourceFactory.createDataSource(properties);
         //获取连接
