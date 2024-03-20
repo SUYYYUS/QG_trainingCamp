@@ -14,7 +14,8 @@ void welcome(){
 	printf("|\t7.反转链表      \t|\n"); //两种方式再选择（递归和非递归）
 	printf("|\t8.判断链表是否成环\t|\n");
 	printf("|\t9.找到单链表的中点\t|\n");
-	printf("|\t0.退粗          \t|\n"); 
+	printf("|\t0.进行奇偶退换         \t|\n"); 
+	printf("|\t输入任意其他数字可退粗\t|\n");
 	printf("*-------------------------------*\n");
 	printf("请选择想要执行的功能：\t\n");
 } 
@@ -183,6 +184,58 @@ LNode* FindMidNode(LinkedList *L){
 	
 }
 
+//奇偶调换 
+LNode* ReverseEvenList(LinkedList *L){
+	//先求出长度，之后分奇偶判断 
+	struct LNode* p = (*L)->next; 
+	int length = length_linkedList(p);
+	struct LNode* even =NULL;
+	struct LNode* odd = NULL;
+	struct LNode* head = *L;
+	int temp ;//用于交换值 
+		even = (*L)->next->next;
+		odd = (*L)->next;
+		if(length == 1 || length == 0){
+			printf("长度不足，无法调换\n");
+		}else{
+			if(length == 2){
+		temp = odd->data;
+		odd->data = even->data;
+		even->data = temp;
+		}
+		//长度为偶数 
+		if(length%2 == 0){
+			//调换数据
+			while(even->next != NULL){
+				temp = odd->data;
+				odd->data = even->data;
+				even->data = temp;
+				even = even->next->next;
+				odd = odd->next->next;
+			}
+			if(length > 2){
+				//最后两个节点调换
+				temp = odd->data;
+				odd->data = even->data;
+				even->data = temp;
+			}
+		}
+		//长度为奇数的情况 
+		if(length%2 != 0 ){
+			while(odd->next != NULL){
+			temp = odd->data;
+			odd->data = even->data;
+			even->data = temp;
+			even = even->next->next;
+			odd = odd->next->next;
+			}
+		}
+		printf("success\n");
+		}
+	
+	return head; 
+}
+
 int main(){
 	//创建头节点
 	ElemType i;
@@ -300,11 +353,15 @@ int main(){
 			system("pause");//暂停
 			system("cls");//清屏
 			break;
-			case 0:
-				printf("欢迎下次再见~~\n");
-				return ;
-		default:
+			case 0://进行奇偶调换 
+			L = ReverseEvenList(&L);
+			TraverseList(L, visit);
+			system("pause");//暂停
+			system("cls");//清屏
 			break;
+		default:
+			printf("欢迎下次再见~~\n");
+			return ;
 	}	
 	}
 return 0;	
