@@ -128,7 +128,7 @@ int main(){
 	ElemType *data =(ElemType *)malloc(sizeof(ElemType ));
 	int *length = (int *)malloc(sizeof(int));
 	int d;
-	int flag = 0;
+	int f = 0;
 	while(1){
 		welcome();
 		char k = getch();
@@ -136,13 +136,13 @@ int main(){
 			case '1': //初始化栈
 				if(initLStack(&s)){
 					printf("初始化成功\n");
-					flag = 1; 
+					f = 1; 
 				}
 				system("pause");
 				system("cls");
 				break;
 			case '2' : //入栈
-				if(flag == 0){
+				if(f == 0){
 					printf("还未初始化\n");
 					system("pause");
 					system("cls");
