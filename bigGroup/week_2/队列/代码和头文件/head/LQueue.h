@@ -41,11 +41,12 @@ typedef enum
     FALSE=0, TRUE=1
 } Status;
 
-int type;//数据类型 
+char type;
 				
-int datatype[30];	//存放一个队列的数据类型
+char datatype[30];
 
-int d = 0;		
+int datasize ; //记录类型的大小 
+int choice;		//选择类型 
 
 /**************************************************************
  *    Prototype Declare Section
@@ -144,4 +145,9 @@ void LPrint(void *q);
  **************************************************************/
 #endif // LQUEUE_H_INCLUDED
 
+//主菜单
+void welcome();
+
+//确定类型
+int gettype();
 
