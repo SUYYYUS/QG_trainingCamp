@@ -122,27 +122,13 @@ Status popLStack(LinkStack *s,ElemType *data){
 	}
 }
 
-
-// 判断栈是否初始化
-Status haveNotInitLStack(LinkStack* s)
-{
-	if (s == NULL)
-	{
-		printf("请先初始化栈\n");
-		system("pause");
-		return 1;
-	}
-	else return 0;
-}
-
-
-
 int main(){
 	ElemType *e = (ElemType *)malloc(sizeof(ElemType ));
 	LinkStack *s ;
 	ElemType *data =(ElemType *)malloc(sizeof(ElemType ));
 	int *length = (int *)malloc(sizeof(int));
 	int d;
+	int flag = 0;
 	while(1){
 		welcome();
 		char k = getch();
@@ -150,12 +136,18 @@ int main(){
 			case '1': //初始化栈
 				if(initLStack(&s)){
 					printf("初始化成功\n");
+					flag = 1; 
 				}
 				system("pause");
 				system("cls");
 				break;
 			case '2' : //入栈
-				if (haveNotInitLStack(s)) break;
+				if(flag == 0){
+					printf("还未初始化\n");
+					system("pause");
+					system("cls");
+					break;
+				}
 				printf("请输入数据：\n");
 				scanf("%d",&d);
 				if(pushLStack(s, d)){
