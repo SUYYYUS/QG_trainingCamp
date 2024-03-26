@@ -30,6 +30,7 @@
     密码：<input type="password" name="password"><br>
     <input type="submit" value="post"><br>
 </form>
+<hr>
 <br>
 <div id="app">
     <el-row>
@@ -39,6 +40,8 @@
         <el-button type="primary" class = "dd" onclick="Trace()" round>TRACE</el-button>
         <el-button type="primary" class = "dd" onclick="Put()" round>PUT</el-button>
     </el-row>
+    <hr>
+    <a v-bind:href="url" >休息一下吧</a>
 </div>
 <br>
 <h2 id = "zhuyi" >TRACE方法用不了</h2>
@@ -146,7 +149,13 @@
 
 <script>
     new Vue({
-        el:"#app"
+        el:"#app",
+        data(){
+            return {
+                username:"",
+                url:"https://www.douyin.com/?recommend=1"
+            }
+        }
     })
 </script>
 
