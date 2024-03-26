@@ -119,11 +119,11 @@ void LPrint(void *q){
 		return ;
 	}
 	if(datasize == sizeof(int)){ 
-		printf("--%d\n",*(int*)q);
+		printf("->%d",*(int*)q);
 	}else if(datasize == sizeof(double)){
-		printf("--%lf\n",*(double*)q); 
+		printf("->%lf",*(double*)q); 
 	}else if(datasize == sizeof(char)){
-		printf("--%c\n",*(char*)q);
+		printf("->%c",*(char*)q);
 	}
 	return ;
 } 
@@ -173,6 +173,7 @@ int main(){
 	while(1){
 		welcome();
 		char s = getch();
+		
 		switch(s){
 			case '1': //初始化队列 
 			if(f == 1){
@@ -200,16 +201,19 @@ int main(){
 				if(datasize == sizeof(int)){
 					printf("输入整形入队的数据：\n");
 					scanf("%d",data);
+					
 				}else if(datasize == sizeof(double)){
 					printf("输入浮点数型入队的数据：\n");
-					scanf("%f",data);
+					scanf("%lf",data);
+					
 				} else if(datasize == sizeof(char)){
 					printf("输入字符入队的数据：\n");
-					scanf_s("%c",data);
-				} 
+					scanf("%s",data);
+					
+				}
 				if(EnLQueue(Q, data)){
 					printf("入队成功\n");
-				}else if(!EnLQueue(Q, &data)){
+				}else if(!EnLQueue(Q, data)){
 					printf("入队失败\n");
 				}
 			system("pause");
@@ -253,6 +257,7 @@ int main(){
 				break;
 			}
 			TraverseLQueue(Q, LPrint);
+			printf("\n");
 			system("pause");
 			system("cls");
 			break;
@@ -305,8 +310,9 @@ int main(){
 			}
 			void *e=(void*)malloc(sizeof(datasize));
 			GetHeadLQueue(Q, e);
-			printf("首元素的：\n"); 
+			printf("首元素 "); 
 			LPrint(e);
+			printf("\n") ;
 			system("pause");
 			system("cls");
 			break;
