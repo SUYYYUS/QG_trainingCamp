@@ -157,6 +157,12 @@ int main(){
 				system("cls");
 			  	break;
 			case '3': //出栈
+			if(f == 0){
+					printf("还未初始化\n");
+					system("pause");
+					system("cls");
+					break;
+				}
 				popLStack(s,data);
 				int ret = *data;
 				printf("该数据为：%d\n",ret);
@@ -164,6 +170,12 @@ int main(){
 				system("cls");
 			  	break;
 			case '4': //是否空栈
+			if(f == 0){
+					printf("还未初始化\n");
+					system("pause");
+					system("cls");
+					break;
+				}
 			if(isEmptyLStack(s)) {
 				printf("栈为空\n");
 			}else {
@@ -173,11 +185,23 @@ int main(){
 				system("cls");
 			  	break;
 			case '5': // 获取栈顶元素
+			if(f == 0){
+					printf("还未初始化\n");
+					system("pause");
+					system("cls");
+					break;
+				}
 				getTopLStack(s,e); 
 				system("pause");
 				system("cls");
 			  	break;
 			case '6'://检测栈长度
+			if(f == 0){
+					printf("还未初始化\n");
+					system("pause");
+					system("cls");
+					break;
+				}
 					LStackLength(s,length);
 					system("pause");
 				system("cls");
@@ -197,6 +221,7 @@ int main(){
 					}else {
 						printf("销毁失败\n");
 					}
+					f = 0;
 				   	system("pause");
 					system("cls");
 					break;
