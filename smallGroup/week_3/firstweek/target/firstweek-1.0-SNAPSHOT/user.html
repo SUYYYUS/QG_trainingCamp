@@ -19,20 +19,7 @@
 
 <!--    查询功能-->
     <el-form :inline="true" :model="user" class="demo-form-inline">
-<!--        <el-form-item label="用户名">-->
-<!--            <el-input v-model="user.username" placeholder="用户名"></el-input>-->
-<!--        </el-form-item>-->
-<!--        <el-form-item label="密码">-->
-<!--            <el-input v-model="user.password" placeholder="密码"></el-input>-->
-<!--        </el-form-item>-->
 
-<!--        <el-form-item label="性别">-->
-<!--            <el-input v-model="user.gender" placeholder="性别"></el-input>-->
-<!--        </el-form-item>-->
-<!--            <el-form-item label="地址">-->
-<!--            <el-input v-model="user.addr" placeholder="地址"></el-input>-->
-<!--        </el-form-item>-->
-<!--        </el-form-item>-->
         <el-form-item label="ID">
             <el-input v-model="user.id" placeholder="ID"></el-input>
         </el-form-item>
@@ -41,6 +28,21 @@
             <el-button type="primary" @click="onSubmit">查询</el-button>
         </el-form-item>
     </el-form>
+
+
+    <el-form :inline="true" :model="user" class="demo-form-inline">
+        <el-form-item label="密码">
+            <el-input v-model="user.password" placeholder="PASSWORD"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" @click="onSubmitByPassword">动态模糊查询</el-button>
+        </el-form-item>
+    </el-form>
+
+
+
+
 
     <el-row>
         <el-button type="danger" plain @click="deleteByIds">批量删除</el-button>
@@ -304,9 +306,28 @@
                         type: 'success'
                     });
                 })
-
-
             },
+
+            //通过密码模糊查询
+            onSubmitByPassword(){
+              console.log(this.user);
+              var _this = this;
+
+              axios({
+                  method:"post",
+                  url:"http://localhost:8080/firstweek_war/User/queryByPassword",
+                  data: this.user.password,
+              }).then(function (resp) {
+                  _this.tableData = resp.data;
+                  //提示查询成功
+                  _this.$message({
+                      message: '恭喜你，查询成功啦',
+                      type: 'success'
+                  });
+              })
+            },
+
+
             //添加数据
             adduser(){
                 //console.log(this.user);

@@ -31,4 +31,7 @@ public interface UserDao {
 
     //计算数据总条数
     public int selectAllCount() throws Exception;
+
+    //通过密码内容进行模糊查询
+    public List<User> queryByPassword(String password) throws Exception;
 }

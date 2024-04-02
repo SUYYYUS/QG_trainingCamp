@@ -30,5 +30,9 @@ public interface UserService {
     public List<User> queryById(int id) throws Exception;
 
 
+    //分页查询
     PageBean<User> selectByPage(int begin, int size) throws Exception;
+
+    //通过密码进行模糊查询
+    public List<User> queryByPassword(String password) throws Exception;
 }

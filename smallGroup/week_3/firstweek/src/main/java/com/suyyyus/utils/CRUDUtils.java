@@ -169,6 +169,41 @@ if(list.size() == 0){
         return count;
     }
 
+
+    /**
+     * 通过密码的内容模糊查询
+     * @param sql
+     * @return
+     * @throws Exception
+     */
+    public static List<User> queryBypassword(String sql,String password) throws Exception {
+        //获取连接
+        connection = JDBCUtils.getConnection();
+        //预编译
+        preparedStatement = connection.prepareStatement(sql);
+        //重要的一行
+        preparedStatement.setString(1,password);
+        //获取resultSet
+        resultSet = preparedStatement.executeQuery();
+
+        List<User> list = new ArrayList<User>();
+
+
+        while (resultSet.next()) {
+
+            list.add(new User(resultSet.getInt("id"), resultSet.getString("username"),
+                    resultSet.getString("password"), resultSet.getString("addr"),
+                    resultSet.getString("gender")));
+        }
+        if (list.size() == 0) {
+            System.out.println("查询失败");
+            JDBCUtils.close(connection, preparedStatement, resultSet);
+            return null;
+        } else {
+            JDBCUtils.close(connection, preparedStatement, resultSet);
+            return list;
+        }
+    }
 }
 
 

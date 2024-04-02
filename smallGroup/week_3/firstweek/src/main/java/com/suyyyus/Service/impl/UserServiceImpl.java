@@ -98,4 +98,15 @@ public class UserServiceImpl implements UserService {
         return pageBean;
 
     }
+
+    /**
+     * 通过密码内容进行模糊查询
+     * @param password
+     * @return
+     */
+    @Override
+    public List<User> queryByPassword(String password) throws Exception {
+        List<User> list = userDao.queryByPassword(password);
+        return list;
+    }
 }

@@ -168,5 +168,31 @@ public class UserServlet extends BaseServlet{
         //System.out.println("User selectAll----------");
     }
 
+    /**
+     * 通过密码进行模糊查询
+     * @param req
+     * @param resp
+     * @throws Exception
+     */
+    public void queryByPassword(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        //1.调用查询
+
+
+        BufferedReader reader = req.getReader();
+        String password = reader.readLine();
+       // int id = Integer.parseInt(_id);
+
+        //PageBean<User> pageBean = userService.selectByPage(currentPage, pageSize);
+
+        List<User> list = userService.queryByPassword(password);
+
+        //2.转为JSON
+        String jsonString = JSON.toJSONString(list);
+        //3.写数据
+
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(jsonString);
+        //System.out.println("User selectAll----------");
+    }
 
 }

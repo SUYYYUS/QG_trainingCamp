@@ -141,4 +141,17 @@ public class UserDaoImpl implements UserDao {
         int count = CRUDUtils.allCount(sql);
         return count;
     }
+
+    /**
+     * 通过密码的内容进行模糊查询
+     * @param password
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<User> queryByPassword(String password) throws Exception {
+        String sql = "select * from tb_user where password like ? ";
+        List<User> list = CRUDUtils.queryBypassword(sql,"%" + password + "%");
+        return list;
+    }
 }
