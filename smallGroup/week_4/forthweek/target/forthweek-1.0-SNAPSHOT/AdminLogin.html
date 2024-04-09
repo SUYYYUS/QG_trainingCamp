@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AdminLogin</title>
+    <link href="css/AdminLogin.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="loginDiv" style="height: 350px">
+<form id = "form">
+    <h1 id="loginmsg">ADMIN LOGIN</h1>
+    <div id="errorMsg" v-model="errorMsg">{{errorMsg}}</div>
+    <p class="login">管理员名<input id="adminname" type="text" name="adminname" v-model="Admin.adminname"></p>
+    <p class="login">密码<input  id="password" type="password" name="password" v-model="Admin.password"></p>
+    <p class="login"><el-button type="primary" @click="login">登录</el-button></p>
+<!--    <input type="button" value="login up" @click="login">-->
+<form>
+ </div>
+<script src="js/axios-0.18.0.js"></script>
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+
+<script>
+
+    new Vue({
+        el:"#loginDiv",
+
+        data(){
+            errorMsg: ''
+            return{
+                Admin:{
+                    adminname:"",
+                    password:"",
+                },
+
+            }
+        },
+
+        methods:{
+            //登录操作
+            login(){
+                var _this = this;
+                axios({
+                    method: "post",
+                    //url:"http://localhost:8080/firstweek_war/Admin/adminLogin?adminName="+this.Admin.adminName + "&password=" + this.Admin.password,
+                    url:"http://localhost:8080/forthweek_war/Admin/adminLogin",
+                    data: _this.Admin,
+                }).then(function (resp) {
+                    if(resp.data=="success"){
+                        //console.log(_this.Admin),
+                        //弹出消息提示
+                        _this.$message({
+                            message: '恭喜你，登录成功啦',
+                            type: 'success'
+                        });
+                        setTimeout(function(){
+                            goto()
+                        },750);
+                    }else if(resp.data == "failed"){
+                        _this.$message({
+                            message: '恭喜你，登录失败',
+                            type: 'warning'
+                        });
+                        _this.errorMsg = "用户名或密码错误",
+                        _this.Admin.password = ""
+                    } else if(resp.data == "null"){
+                        _this.errorMsg = "用户名和密码不能为空！",
+                        _this.Admin.password = ""
+                    }
+                })
+            }
+        }
+    })
+</script>
+<script>
+    function goto() {
+        location.href="/forthweek_war/empty.html";
+    }
+
+</script>
+</body>
+</html>

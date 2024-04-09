@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>**</title>
+    <link href="css/empty.css" rel="stylesheet">
+</head>
+<body>
+<h1>谢帝，谢帝，我要diss你</h1>
+
+<div id="e1">
+    <template>
+        <el-table
+                :data="tableData"
+                style="width: 100%"
+                :row-class-name="tableRowClassName"
+                @selection-change="handleSelectionChange">
+            <el-table-column
+                    type="selection"
+                    width="55">
+            </el-table-column>
+            <el-table-column
+                    type="index"
+                    width="50">
+            </el-table-column>
+            <el-table-column
+                    prop="cardid"
+                    label="身份证号"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="username"
+                    label="用户名"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="address"
+                    label="性别"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="gender"
+                    label="地址"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="create_time"
+                    label="注册时间"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="id"
+                    align="center"
+                    label="操作">
+            </el-table-column>
+
+        </el-table>
+    </template>
+</div>
+
+
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+
+<script src="js/axios-0.18.0.js"></script>
+<script>
+    new Vue({
+
+        el:"#e1",
+        mounted(){
+            this.see();
+        },
+        data(){
+            return{
+                //搜索表单数据
+                user: {
+                    cardid:'',
+                    username: '',
+                    password: '',
+                    gender: '',
+                    address: '',
+                    create_time:'',
+                },
+                //选中复选框后执行的
+                multipleSelection: [],
+                tableData: [],
+            }
+        },
+
+        methods:{
+
+            see(){
+                var _this = this;
+                axios({
+                    method: "get",
+                    url:"http://localhost:8080/forthweek_war/User/getSelfInformation",
+                }).then(resp =>{
+                    _this.tableData = Array.isArray(resp.data) ? resp.data : [resp.data];
+
+                    // _this.tableData = resp.data;
+                });
+            },
+            tableRowClassName({row, rowIndex}) {
+                if (rowIndex%2 === 0) {
+                    return 'warning-row';
+                } //else  {
+                //return 'success-row';
+                //}
+                return 'success-row';
+            },
+            //复选框选中后执行的方法
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+
+            },
+
+
+        },
+
+
+    })
+</script>
+</body>
+</html>

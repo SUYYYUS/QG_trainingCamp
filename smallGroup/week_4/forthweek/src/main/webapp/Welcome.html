@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统初始界面</title>
+    <link href="css/Welcome.css" rel="stylesheet">
+</head>
+
+<body>
+
+<h1 id = "welcome">欢迎光临</h1>
+<br>
+
+<div id="welcomeDiv">
+        <h2 id = "select">请选择你的身份:</h2>
+<el-row>
+
+    <el-button type="primary" @click="Admin" round>我是管理员</el-button>
+    <el-button type="primary" @click="User" round>我是用户</el-button>
+</el-row>
+
+</div>
+
+<script src="js/axios-0.18.0.js"></script>
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+
+<script>
+
+    new Vue ({
+      el :"#welcomeDiv",
+
+       methods:{
+          Admin(){
+              gotoAdmin();
+          },
+           User(){
+              gotoUser();
+           }
+       }
+
+    })
+</script>
+
+<script>
+    function gotoAdmin() {
+        location.href = "/forthweek_war/AdminLogin.html";
+    }
+    function gotoUser() {
+        location.href = "/forthweek_war/UserLogin.html";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+-- 创建和使用数据库
+create database forthweek;
+
+use forthweek;
+
+
+-- 创建用户表
+create table tb_user
+(
+	id int unsigned auto_increment comment '主键ID',
+	cardid int not null comment '身份证号',
+	username varchar(20) not null comment '用户名',
+	password varchar(300) not null comment '密码',
+	gender varchar(5) not null,
+	address varchar(20) not null comment '城市',
+	create_time datetime not null comment '注册时间',
+	constraint tb_user_pk
+		primary key (id)
+)
+comment '用户表';
+
+create unique index tb_user_cardid_uindex
+	on tb_user (cardid);
+
+create unique index tb_user_username_uindex
+	on tb_user (username);
+
+
+-- 创建管理员表
+create table tb_admin
+(
+	id int unsigned auto_increment comment '主键ID',
+	adminname varchar(30) not null comment '管理员名',
+	password varchar(30) not null comment '密码',
+	constraint tb_admin_pk
+		primary key (id)
+)
+comment '管理员表';
+
+create unique index tb_admin_adminname_uindex
+	on tb_admin (adminname);
+
+
+-- 插入管理员数据
+insert into tb_admin (adminname, password) values ('suyyyus', '123456'), ('kanye', '456789')
+
